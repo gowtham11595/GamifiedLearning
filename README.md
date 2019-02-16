@@ -1,0 +1,1 @@
+Authentication information along with teams creation api
