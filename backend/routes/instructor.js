@@ -10,10 +10,16 @@ router.post('/createTeam', function(req, res) {
   jwt.verify(token, 'secret', function(err, decoded) {
     if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
+    if(decoded.scope==="Student"){
+        var errorResponse = "";
+        res.status(500).send("Unauthorized Access");
+    }
+
     const team = new Team({
       teamName:req.body.teamName,
       teamDetails:req.body.teamDetails,
-      courseId:req.body.courseId
+      courseId:req.body.courseId,
+      createdBy:decoded.email
   });
 
     team.save((err,play)=>{

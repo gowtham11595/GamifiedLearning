@@ -7,6 +7,18 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    phone:{
+      type: Number,
+      required: true
+    },
+    university:{
+      type: String,
+      required: true
+    },
+    class:{
+      type: String,
+      required: true
+    },
     email: {
         type: String,
         required: true
@@ -18,9 +30,13 @@ const UserSchema = new Schema({
     avatar: {
         type: String
     },
-    date: {
+    creationDate: {
         type: Date,
         default: Date.now
+    },
+    scope:{
+        type:String,
+        default: "Student"
     }
 });
 

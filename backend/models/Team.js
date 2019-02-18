@@ -15,7 +15,7 @@ const TeamSchema = new Schema({
     type: String,
     required: true
   },
-  date: {
+  createdDate: {
       type: Date,
       default: Date.now
   }

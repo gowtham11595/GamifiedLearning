@@ -25,16 +25,20 @@ router.post('/register', function(req, res) {
             });
         }
         else {
-            const avatar = gravatar.url(req.body.email, {
-                s: '200',
-                r: 'pg',
-                d: 'mm'
-            });
+            // const avatar = gravatar.url(req.body.email, {
+            //     s: '200',
+            //     r: 'pg',
+            //     d: 'mm'
+            // });
+            console.log("request = "+JSON.stringify(req.body));
             const newUser = new User({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
-                avatar
+                avatar: req.body.avatar,
+                phone: req.body.phone,
+                university:req.body.university,
+                class:req.body.class
             });
 
             bcrypt.genSalt(10, (err, salt) => {
@@ -79,8 +83,9 @@ router.post('/login', (req, res) => {
                         if(isMatch) {
                             const payload = {
                                 id: user.id,
+                                emailid: user.email,
                                 name: user.name,
-                                avatar: user.avatar
+                                scope: user.scope
                             }
                             jwt.sign(payload, 'secret', {
                                 expiresIn: 3600
