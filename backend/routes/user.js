@@ -30,7 +30,7 @@ router.post('/register', function(req, res) {
             //     r: 'pg',
             //     d: 'mm'
             // });
-            console.log("request = "+JSON.stringify(req.body));
+            //console.log("request = "+JSON.stringify(req.body));
             const newUser = new User({
                 name: req.body.name,
                 email: req.body.email,
@@ -115,6 +115,21 @@ router.get('/auth_me', function(req, res) {
     if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
     res.status(200).send(decoded);
+  });
+});
+
+router.get('/getUsersOfCourse/:courseId', function(req, res) {
+  var token = req.headers['x-access-token'];
+  if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+  jwt.verify(token, 'secret', function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+    var courseId  = req.params.courseId;
+    User.find({courseId:courseId}, function(err, users) {
+       res.status(200).send(users);
+     });
+    //res.status(200).send(decoded);
   });
 });
 

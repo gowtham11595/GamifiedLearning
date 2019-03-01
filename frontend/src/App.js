@@ -10,6 +10,10 @@ import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import Teams from './components/Teams';
+import CreateTeam from './components/CreateTeam';
+import Quests from './components/Quests';
+import CreateQuest from './components/CreateQuest';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -36,6 +40,10 @@ class App extends Component {
                 <div className="container">
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/login" component={ Login } />
+                  <Route exact path="/teams" component={ Teams } />
+                  <Route exact path="/createTeam" component={ CreateTeam } />
+                  <Route exact path="/quests" component={ Quests } />
+                  <Route exact path="/createQuest" component={ CreateQuest } />
                 </div>
             </div>
           </Router>

@@ -74,7 +74,7 @@ class Login extends Component {
                     placeholder="Password"
                     className={classnames('form-control form-control-lg', {
                         'is-invalid': errors.password
-                    })} 
+                    })}
                     name="password"
                     onChange={ this.handleInputChange }
                     value={ this.state.password }
