@@ -4,8 +4,9 @@ import "../styling/Home.css";
 import Menu from './Menu';
 import { getCourseUsers } from '../actions/Instructors';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 
-export default class CreateTeam extends Component {
+class CreateTeam extends Component {
 
   constructor() {
       super();
@@ -13,14 +14,14 @@ export default class CreateTeam extends Component {
     }
 
     componentDidMount(){
-      //console.log("Came in");
+      console.log("Came in");
       this.getCourseUsers();
     }
 
     getCourseUsers(){
       console.log("Came get 1");
       //e.preventDefault();
-      //this.props.getCourseUsers();
+      this.props.getCourseUsers();
     }
 
 
@@ -61,3 +62,8 @@ CreateTeam.propTypes = {
     getCourseUsers: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 }
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+    errors: state.errors
+})
+export  default connect(mapStateToProps, { getCourseUsers })(CreateTeam)

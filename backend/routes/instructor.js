@@ -71,7 +71,8 @@ router.post('/createQuest', upload.single('file'), (req, res) => {
       console.log(JSON.stringify(req.body));
       console.log(JSON.stringify(req.body.title));
       console.log(JSON.stringify(req.body.description));
-      console.log(JSON.stringify(req.body.file));
+      //console.log(JSON.stringify(req));
+      console.log(JSON.stringify(req.file.filename));
 
 
       res.json({"status":"Success"});

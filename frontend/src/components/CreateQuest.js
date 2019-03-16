@@ -64,6 +64,7 @@ class CreateQuest extends Component {
               <Menu/><br/><br/><h2 style={{marginBottom: '20px'}}>Create Quest</h2>
               <form onSubmit={ this.handleSubmit }>
                   <div className="form-group">
+                    <h6>Title</h6>
                       <input
                       type="text"
                       placeholder="Title"
@@ -73,6 +74,7 @@ class CreateQuest extends Component {
                       />
                   </div>
                   <div className="form-group">
+                    <h6>Description</h6>
                   <textarea name="description" onChange={ this.handleInputChange } className={classnames('form-control form-control-lg')} placeholder="Description" rows="10">
                   </textarea>
                   </div>
@@ -81,10 +83,14 @@ class CreateQuest extends Component {
                       <input
                       type="file"
                       className={classnames('form-control form-control-lg')}
-                      name="avatar"
+                      name=""
                       multiple
                       onChange = {this.handleFileChange}
                       />
+                  </div>
+                  <div>
+                    <h6>Submission Date</h6>
+                    <input type="datetime-local"/>
                   </div>
                   <div className="form-group">
                       <button type="submit" className="btn btn-primary">

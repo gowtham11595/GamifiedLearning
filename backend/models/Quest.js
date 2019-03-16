@@ -11,6 +11,9 @@ const QuestSchema = new Schema({
     type: String,
     required:true
   },
+  submissionDate:{
+    type:Date
+  },
   createdDate: {
       type: Date,
       default: Date.now

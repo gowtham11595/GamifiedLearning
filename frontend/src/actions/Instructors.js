@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 
 
 export const getCourseUsers = (user, history) => dispatch => {
-    axios.get('/api/getUsersOfCourse/cs1', user)
+    axios.get('/api/users/getUsersOfCourse/cs1', user)
             .then(response => {
                 if (response.data.message) {
                   console.log(
