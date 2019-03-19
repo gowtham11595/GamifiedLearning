@@ -4,6 +4,7 @@ import {createQuest} from '../actions/Instructors';
 import "../styling/Home.css";
 import Menu from './Menu';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class CreateQuest extends Component {
 
@@ -12,8 +13,10 @@ class CreateQuest extends Component {
       this.state = {
           title: '',
           description: '',
+          submissionDate:'',
           files:'',
-          errors: {}
+          errors: {},
+          loaded: 0
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleFileChange = this.handleFileChange.bind(this);
@@ -21,7 +24,22 @@ class CreateQuest extends Component {
   }
 
   componentDidMount(){
+    var that = this;
+    axios
+      .get("/api/instructors/getCourseNames")
+      .then(response => {
+        console.log(response);
+        var courseTitles = [];
+        for(var i=0;i<response.data.length;i++){
+          courseTitles.push(response.data[i].courseTitle);
+        }
+        that.setState({ data: courseTitles });
+        console.log("this state = "+that.state);
+        console.log(that.state.data);
+        that.setState({mainData:response.data});
 
+      })
+      .catch(error => console.log(error.response));
   }
 
   handleSubmit(e) {
@@ -30,9 +48,10 @@ class CreateQuest extends Component {
       const quest = {
           title: this.state.title,
           description: this.state.description,
+          submissionDate: this.state.submissionDate,
           files: this.state.files
       }
-      this.props.createQuest(quest);
+      this.props.createQuest(quest, this);
   }
 
 
@@ -52,13 +71,16 @@ class CreateQuest extends Component {
       fileOut = file;
       files.push(file);
     }
-    //this.setState({["files"]:files});
+    //this.setState({"files":files});
 
     this.setState({"files":fileOut});
     console.log("State-->"+JSON.stringify(this.state));
 }
 
     render() {
+
+       const { schemas } = this.state;
+
         return (
             <div>
               <Menu/><br/><br/><h2 style={{marginBottom: '20px'}}>Create Quest</h2>
@@ -84,18 +106,29 @@ class CreateQuest extends Component {
                       type="file"
                       className={classnames('form-control form-control-lg')}
                       name=""
-                      multiple
                       onChange = {this.handleFileChange}
                       />
                   </div>
                   <div>
                     <h6>Submission Date</h6>
-                    <input type="datetime-local"/>
+                    <input type="datetime-local" onChange={ this.handleInputChange } className={classnames('form-control form-control-lg')}/>
                   </div>
+                  <div>
+                    <h6>Course Title</h6>
+                      <select onChange={this.handleInputChange}>
+                        {this.state && this.state.mainData &&
+                        this.state.mainData.length > 0 &&
+                        this.state.mainData.map(schema => {
+                          return <option key={schema._id} value={schema.courseTitle}>{schema.courseTitle}</option>;
+                        })}
+                      </select>
+                  </div>
+                  <br/>
                   <div className="form-group">
                       <button type="submit" className="btn btn-primary">
                           Create Quest
                       </button>
+                       <div> {Math.round(this.state.loaded,2) } %</div>
                   </div>
               </form>
 
@@ -103,13 +136,6 @@ class CreateQuest extends Component {
         );
     }
 }
-
-
-// CreateQuest.propTypes = {
-//     createQuest: PropTypes.func.isRequired,
-//     errors: PropTypes.object.isRequired
-// }
-
 const mapStateToProps = (state) => ({
     auth: state.auth,
     errors: state.errors

@@ -6,7 +6,7 @@ const Menu = () => {
   return (
     <div id="parent">
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
+      <Navbar.Brand href="/home">Dashboard</Navbar.Brand>
         <Nav className="mr-auto">
         <Nav.Link href="/quests">Quests</Nav.Link>
         <Nav.Link href="/teams">Teams</Nav.Link>

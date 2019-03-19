@@ -14,9 +14,12 @@ const QuestSchema = new Schema({
   submissionDate:{
     type:Date
   },
+  courseTitle:{
+    type:String,
+    required:true
+  },
   createdDate: {
-      type: Date,
-      default: Date.now
+      type: Number
   }
 });
 
