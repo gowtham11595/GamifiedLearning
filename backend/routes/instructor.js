@@ -67,7 +67,8 @@ const storage = multer.diskStorage({
       console.log("time"+time);
       const separator = ";;gk;-;";
       const newFilename=file.originalname+separator+time;
-console.log(req.body);
+      console.log(req.body);
+      console.log(req.body.courseTitle);
       const quest = new Quest({
         title:req.body.title,
         description:req.body.description,
@@ -78,9 +79,10 @@ console.log(req.body);
 
     quest.save((err,play)=>{
     if(err){
-      res.json(err);
+      //return err;
     } else{
-        res.json({msg:"Quest created"});
+        //res.json({msg:"Quest created"});
+        return 0;
     }
   });
 
@@ -98,8 +100,8 @@ router.post('/createQuest', upload.single('file',10), (req, res) => {
       console.log(JSON.stringify(req.body));
       console.log(JSON.stringify(req.body.title));
       console.log(JSON.stringify(req.body.description));
-
-      res.json({"status":"Success"});
+      console.log("courseTitle"+JSON.stringify(req.body.courseTitle));
+      res.json({msg:"Quest created"});
     });
 
   /*  router.get('/download', function(req, res){
@@ -146,7 +148,6 @@ router.post('/createCourse', function(req, res) {
 });
 
 router.get('/getCourseNames', function(req, res) {
-  //console.log(req.headers);
   const token = req.headers['authorization'].split(" ")[1];
   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 

@@ -50,6 +50,7 @@ export const createQuest = (quest) => dispatch => {
   bodyFormData.set('description', quest.description);
   bodyFormData.set('submissionDate', quest.submissionDate);
   bodyFormData.set('file', quest.files);
+  bodyFormData.set('courseTitle', quest.courseTitle);
 
   axios.post('/api/instructors/createQuest', bodyFormData)
     .then((result) => {
@@ -61,6 +62,7 @@ export const createQuest = (quest) => dispatch => {
 }
 
 export const createCourse = (user, history) => dispatch => {
+  console.log("Auth header = "+axios.defaults.headers.common['Authorization']);
   var token = (axios.defaults.headers.common['Authorization']).split(" ")[1];
   console.log("Token="+token);
     axios.post('/api/instructors/createCourse',

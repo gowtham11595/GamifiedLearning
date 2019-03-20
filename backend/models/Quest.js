@@ -15,8 +15,7 @@ const QuestSchema = new Schema({
     type:Date
   },
   courseTitle:{
-    type:String,
-    required:true
+    type:String
   },
   createdDate: {
       type: Number
