@@ -51,17 +51,16 @@ class CreateQuest extends Component {
 
   handleSubmit(e) {
       e.preventDefault();
-      // console.log(e.target.files[0]);
       const quest = {
           title: this.state.title,
           description: this.state.description,
           submissionDate: this.state.submissionDate,
           files: this.state.files,
-          courseTitle: this.state.courseTitle
+          courseTitle: this.state.courseTitle,
+          points: this.state.points
       }
       this.props.createQuest(quest, this);
   }
-
 
   handleInputChange(e) {
     if((''+e.target.name)==='courseTitle'){
@@ -77,7 +76,7 @@ class CreateQuest extends Component {
     console.log(this.state);
   }
 
-  handleFileChange(event){
+  handleFileChange(event) {
     let files = [];
     let fileOut = {};
     for(let size=0; size < event.target.files.length; size++){
@@ -139,7 +138,17 @@ class CreateQuest extends Component {
                         })}
                       </select>
                   </div>
-                  <br/>
+                    <div className="form-group">
+                      <h6>Points</h6>
+                        <input
+                        type="number"
+                        placeholder="Points"
+                        className={classnames('form-control form-control-lg')}
+                        name="points"
+                        onChange={ this.handleInputChange }
+                        />
+                    </div>
+                    <br/>
                   <div className="form-group">
                       <button type="submit" className="btn btn-primary">
                           Create Quest

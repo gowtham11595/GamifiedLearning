@@ -15,7 +15,7 @@ class ShowCourses extends Component {
   componentDidMount(){
     var that = this;
     axios
-      .get("/api/instructors/getCourseNames")
+      .get("/api/students/getMyCourses")
       .then(response => {
         console.log(response);
         var courseTitles = [];
@@ -46,12 +46,9 @@ class ShowCourses extends Component {
                 this.state.mainData.length > 0 &&
                 this.state.mainData.map(schema => {
                   return (
-                    <div key={schema._id} class="col-md-4 card bg-light" style={{padding:"1em", marginBottom: '40px', height:'10em',background:"#BFBFBF"}}>
+                    <div key={schema._id} class="col-md-4 card bg-light" style={{padding:"1em", marginBottom: '40px', height:'5em',background:"#BFBFBF"}}>
                       <p>
                       <h3>Title : {schema.courseTitle}<br/></h3>
-                      Description : {schema.description}<br/>
-                      Start Date : {schema.startDate}<br/>
-                      End Date : {schema.endDate}
                     </p>
                    </div>);
                 })}

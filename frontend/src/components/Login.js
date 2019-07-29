@@ -40,7 +40,14 @@ class Login extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.auth.isAuthenticated) {
-            this.props.history.push('/home')
+          console.log(JSON.stringify(nextProps.auth));
+          console.log(nextProps.auth.user.scope);
+          console.log(""+nextProps.auth.user.scope === "Professor");
+            if(nextProps.auth.user.scope === "Professor"){
+              this.props.history.push('/home')
+            } else {
+              this.props.history.push('/shome');
+            }
         }
         if(nextProps.errors) {
             this.setState({

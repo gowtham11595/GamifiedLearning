@@ -12,7 +12,6 @@ const Menu = () => {
         <Nav.Link href="/teams">Teams</Nav.Link>
         <Nav.Link href="/presentations">Presentation & Feedback</Nav.Link>
         <Nav.Link href="/badges">Badges</Nav.Link>
-        <Nav.Link href="/points">Points</Nav.Link>
         </Nav>
     </Navbar>
     </div>

@@ -18,6 +18,7 @@ export const loginUser = (user) => dispatch => {
     axios.post('/api/users/login', user)
             .then(res => {
                 const { token } = res.data;
+                console.log("Response data = "+ JSON.stringify(res.data));
                 localStorage.setItem('jwtToken', token);
                 setAuthToken(token);
                 const decoded = jwt_decode(token);
@@ -42,5 +43,9 @@ export const logoutUser = (history) => dispatch => {
     localStorage.removeItem('jwtToken');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
+    alert("Session Logged out");
+    if(!history){
+      window.location.href = "/login";
+    }
     history.push('/login');
 }

@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const TeamSchema = new Schema({
-  teamName: {
+const TeamDiscussionSchema = new Schema({
+  teamId: {
       type: String,
       required: true
   },
-  teamDetails: {
-    type:Array,
+  courseTitle: {
+    type:String,
     required:true
   },
-  courseTitle:{
-    type: String,
+  data:{
+    type: Array,
     required: true
   },
   createdDate: {
@@ -24,6 +24,6 @@ const TeamSchema = new Schema({
   }
 });
 
-const Team = mongoose.model('teams', TeamSchema);
+const TeamDiscussion = mongoose.model('teamDiscussions', TeamDiscussionSchema);
 
-module.exports = Team;
+module.exports = TeamDiscussion;

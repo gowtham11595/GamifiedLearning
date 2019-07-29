@@ -7,6 +7,7 @@ var router = express.Router();
 
 const users = require('./routes/user');
 const instructors = require('./routes/instructor');
+const students = require('./routes/students');
 
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
@@ -22,6 +23,7 @@ app.use(bodyParser.json({limit: '10mb', extended: false }));
 
 app.use('/api/users', users);
 app.use('/api/instructors', instructors);
+app.use('/api/students', students);
 
 app.get('/', function(req, res) {
     res.send('hello');

@@ -3,23 +3,24 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 import ShowCourses from "../components/ShowCourses";
-//import React from 'react';
 
-export const getCourseUsers = (user, history) => dispatch => {
-    axios.get('/api/users/getUsersOfCourse/cs1', user)
-            .then(response => {
-                if (response.data.message) {
-                  console.log(
-                    `Got ${Object.entries(response.data.message).length} breeds`
-                  );
-                }
-              })
-            .catch(err => {
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                });
-            });
+
+export const getCourseUsers = (thisPointer) => dispatch => {
+  var that=thisPointer;
+  axios.get('/api/users/getUsers')
+          .then(response => {
+              //that.setState({data:response.data});
+              console.log(response.data);
+              console.log("showing state = "+that.state);
+              that.setState({'userData':response.data});
+              console.log("after setting state = "+that.state);
+            })
+          .catch(err => {
+              dispatch({
+                  type: GET_ERRORS,
+                  payload: err.response.data
+              });
+          });
 }
 
 /*
@@ -51,7 +52,8 @@ export const createQuest = (quest) => dispatch => {
   bodyFormData.set('submissionDate', quest.submissionDate);
   bodyFormData.set('file', quest.files);
   bodyFormData.set('courseTitle', quest.courseTitle);
-
+  bodyFormData.set('points', quest.points);
+  
   axios.post('/api/instructors/createQuest', bodyFormData)
     .then((result) => {
       // access results...
@@ -73,6 +75,34 @@ export const createCourse = (user, history) => dispatch => {
                   }
                 })
             .then(res => history.push('/showCourses'))
+            .catch(err => {
+              console.log(err);
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                });
+            });
+}
+
+export const createBadge = (badge, history) => dispatch => {
+  var token = (axios.defaults.headers.common['Authorization']).split(" ")[1];
+  console.log("Token="+token);
+    axios.post('/api/instructors/createBadge',badge)
+            .then(res => history.push('/showBadges'))
+            .catch(err => {
+              console.log(err);
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                });
+            });
+}
+
+export const createTeam = (team, history) => dispatch => {
+  var token = (axios.defaults.headers.common['Authorization']).split(" ")[1];
+  console.log("Token="+token);
+    axios.post('/api/instructors/createTeam',team)
+            .then(res => history.push('/showTeams'))
             .catch(err => {
               console.log(err);
                 dispatch({

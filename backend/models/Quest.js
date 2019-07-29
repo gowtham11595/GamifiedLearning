@@ -8,17 +8,26 @@ const QuestSchema = new Schema({
       required: true
   },
   description: {
-    type: String,
-    required:true
+    type: String
   },
   submissionDate:{
     type:Date
   },
+  fileName:{
+    type:String
+  },
   courseTitle:{
     type:String
   },
+  fName:{
+    type: String
+  },
+  points:{
+    type:Number
+  },
   createdDate: {
-      type: Number
+      type: Number,
+      required:true
   }
 });
 
